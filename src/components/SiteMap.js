@@ -2,7 +2,7 @@ import React, {SuperComponent as Component} from 'react';
 
 
 
-class SiteMap extends React.Component {
+class SiteMap extends Component {
 
   constructor() {
     super();
@@ -103,8 +103,5 @@ class ReservedList extends React.Component {
     )
   }
 }
-
-
-
 
 export default SiteMap
