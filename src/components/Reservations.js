@@ -5,6 +5,7 @@ const RESERVATION_URL = "http://localhost:5000/reservations.json"
 
 
 
+
 class Reservations extends React.Component {
 
   constructor() {
@@ -13,7 +14,6 @@ class Reservations extends React.Component {
         row :10,
         col :6,
       seat: [],
-      seatAvailable: [],
       seatReserved: []
     }
     //fetch the reserved seats
@@ -21,8 +21,8 @@ class Reservations extends React.Component {
     this.seatGenerate = this.seatGenerate.bind(this);
 
     const fetchSeats = () => {
-    axios.get(RESERVATION_URL).then( results => this.setState({seatReserved: results.data.map(function(obj){return obj.seat_row_col})}) )
-
+    axios.get(RESERVATION_URL).then( results => this.setState({seatReserved: results.data.map(function(obj){return obj.seat_row_col})})  )
+//
 
     // setTimeout( fetchSeats,4000); //Recursive
   }
@@ -31,9 +31,10 @@ class Reservations extends React.Component {
 
 // save the reserved seats
   saveSeats(seat){
-    axios.post(RESERVATION_URL,{seat_row_col:seat}).then(results => {
-      this.setState({seatReserved:[results.data.seat_row_col,...this.state.seatReserved ]})
-    });
+    axios.post(RESERVATION_URL,{user_id:32, flight_id: 28, seat_row_col:seat}).then(results => console.log(results))
+    // then(results => {
+    //   this.setState({seatReserved:[results.data.seat_row_col,...this.state.seatReserved ]})
+    // });
     // this.setState({secrets: [...this.state.secrets,{content:s}]});  //without mutation
   }
 
@@ -63,8 +64,9 @@ class Reservations extends React.Component {
       {
         this.setState({
           seatReserved: this.state.seatReserved.concat(seat),
-          seatAvailable: this.state.seatAvailable.filter(res => res != seat)
+          // seatAvailable: this.state.seatAvailable.filter(res => res != seat)
         });
+        
         this.saveSeats(seat);
       }
     }
@@ -103,7 +105,7 @@ class DrawGrid extends React.Component {
           </tbody>
         </table>
 
-        <AvailableList available = { this.props.available } />
+
         <ReservedList reserved = { this.props.reserved } />
        </div>
     )
@@ -114,19 +116,7 @@ class DrawGrid extends React.Component {
   }
 }
 
-class AvailableList extends React.Component {
-  render() {
-    const seatCount = this.props.available.length;
-    return(
-      <div className="left">
-        <h4>Available Seats: ({seatCount == 0? 'No seats available' : seatCount})</h4>
-        <ul>
-          {this.props.available.map( res => <li key={res} >{res}</li> )}
-        </ul>
-      </div>
-    )
-  }
-}
+
 
 class ReservedList extends React.Component {
   render() {
