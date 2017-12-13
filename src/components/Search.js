@@ -1,7 +1,9 @@
 import React, {PureComponent as Component} from 'react'
-
+import axios from 'axios';
 
 // const SERVER_URL = "http://593d3fe7.ngrok.io/secrets.json"
+// need to get to the route on the server get /flights
+const SERVER_URL = "http://localhost:5000/flights.json"
 
 class SearchForm extends Component {
 
@@ -15,24 +17,54 @@ class SearchForm extends Component {
 }
 
 
-function Gallery () {
+function Gallery (props) {
   return (
     <div>
     <h4>Gallery Coming Soon</h4>
+    { props.flights.map( s => <p key={ s.id }>{ s.id } { s.flight_number } { s.origin } { s.destination } {s.airplane_id}</p> ) }
     </div>
   )
 }
 
 
+// airplane_id:
+// 28
+// date:
+// null
+// destination:
+// "Hong Kong"
+// flight_number:
+// "BCJ100"
+// id:
+// 11
+// origin:
+// "Sydney"
+// url:
+// "http://localhost:5000/flights/11.json"
+
+
 class Search extends Component {
 
+  constructor () {
+    super()
+    // this.state = { flights: [
+    //                 {id: 1, flight: "Bobo"},
+    //                 {id: 2, flight: "Fredo"}
+    //               ]}
+    this.state = { flights: []}
+
+    const fetchFlights = () => {
+      axios.get(SERVER_URL).then( results => this.setState({ flights: results.data }) )
+    }
+  fetchFlights()
+  }
 
   render() {
     return (
       <div>
         <h2>Search Page under construction...</h2>
         <SearchForm />
-        <Gallery />
+        <Gallery flights={ this.state.flights }/>
       </div>
     )
   }
