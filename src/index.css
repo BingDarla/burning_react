@@ -2,21 +2,44 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-image: url("beach.jpg");
+  width: 900px;
+  margin: 0 auto;
 }
 .square {
   width: 2px;
   height: 2px;
 }
+
+.container{
+  width: 900px;
+  margin: 0 auto;
+}
+
+
+
 #app {
 }
 
 h1 {
   text-align: center;
+  color: #d3d3d3;
+  text-transform: uppercase;
+  padding-top: 30px;
+
+}
+h2 {
+  text-align: center;
+  color: #d3d3d3;
+  padding-top: 30px;
+  text-transform: uppercase;
 }
 
-.container {
-  width: 600px;
-  margin: auto;
+h4 {
+  text-align: center;
+  color: #d3d3d3;
+  padding-top: 30px;
+  text-transform: uppercase;
 }
 
 .grid td {
@@ -24,9 +47,11 @@ h1 {
   height: 50px;
   padding: 50px 30px;
   border: 2px solid pink;
-  text-align: center;
+  /*text-align: center;*/
   float: left;
   margin: 5px;
+  font-size: 15px;
+  color: white;
 }
 
 .grid td:hover {
@@ -52,6 +77,24 @@ h1 {
   color: #333;
 }
 
+.td{
+  font-size: 10px;
+}
+
 li {
   list-style: none;
+  color: #d3d3d3;
+}
+
+a {
+  color:white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+p{
+  padding-top:30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: grey;
 }
