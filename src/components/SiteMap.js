@@ -1,25 +1,34 @@
 import React, {SuperComponent as Component} from 'react';
+import axios from 'axios';
 
 
 
-class SiteMap extends Component {
+class SiteMap extends React.Component {
 
   constructor() {
     super();
       this.state = {
-      seat: [
-        'Front1','Front2','Front3',
-        'Middle1','Middle2','Middle3',
-        'Back1','Back2','Back3'
-      ],
-      seatAvailable: [
-        'Front1','Front2','Front3',
-        'Middle1','Middle2','Middle3',
-        'Back1','Back2','Back3'
-      ],
+        row :10,
+        col :6,
+      seat: [],
+      seatAvailable: [],
       seatReserved: []
     }
+    this.seatGenerate = this.seatGenerate.bind(this);
   }
+
+  seatGenerate(){
+    let array = [];
+    for (let i=1;i<=this.state.row;i++){
+      for (let j=1;j<=this.state.col;j++){
+        array.push(i.toString()+j.toString());
+      }
+    }
+    this.setState({
+      seat: array.slice(),
+      seatAvailable:array.slice()})
+  }
+
 
   onClickData(seat) {
     if(this.state.seatReserved.indexOf(seat) > -1 ) {
@@ -39,6 +48,7 @@ class SiteMap extends Component {
     return (
       <div>
         <h1>Seat Reservation System</h1>
+        <button onClick={this.seatGenerate }>Generate Seat</button>
         <DrawGrid
           seat = { this.state.seat }
           available = { this.state.seatAvailable }
@@ -66,8 +76,6 @@ class DrawGrid extends React.Component {
           </tbody>
         </table>
 
-        <AvailableList available = { this.props.available } />
-        <ReservedList reserved = { this.props.reserved } />
        </div>
     )
   }
