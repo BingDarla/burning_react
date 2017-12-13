@@ -56,13 +56,13 @@ class Home extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
+
       <h1>This is the Home Page of Burning Airlines</h1>
       <HomeForm onSubmit={ this.saveLogin }/>
-=======
+
         <h1>home page</h1>
 
->>>>>>> 35ed72cfc121c07017d5756747eb8e4ab082c1aa
+
         <ul>
           <li>Welcome: {this.state.content}</li>
           <li className="showAtLogin"><Link to="/flights">flights</Link></li>
