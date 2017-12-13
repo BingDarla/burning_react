@@ -1,9 +1,11 @@
 import React, {SuperComponent as Component} from 'react';
 import axios from 'axios';
 
+const RESERVATION_URL = "http://localhost:5000/reservations.json"
 
 
-class SiteMap extends React.Component {
+
+class Reservations extends React.Component {
 
   constructor() {
     super();
@@ -12,9 +14,27 @@ class SiteMap extends React.Component {
         col :6,
       seat: [],
       seatAvailable: [],
-      seatReserved: []
+      seatReserved: ['11','13']
     }
+    //fetch the reserved seats
+    this.saveSeats = this.saveSeats.bind(this);
     this.seatGenerate = this.seatGenerate.bind(this);
+
+    const fetchSeats = () => {
+    axios.get(RESERVATION_URL).then( results => this.setState({reservation: results.data}) )
+
+
+    // setTimeout( fetchSeats,4000); //Recursive
+  }
+  fetchSeats();
+}
+
+// save the reserved seats
+  saveSeats(seat){
+    axios.post(RESERVATION_URL,{seat_row_col:seat, user_id:3}).then(results => {
+      this.setState({seatReserved:[results.data.seat_row_col,...this.state.seatReserved ]})
+    });
+    // this.setState({secrets: [...this.state.secrets,{content:s}]});  //without mutation
   }
 
   seatGenerate(){
@@ -25,24 +45,31 @@ class SiteMap extends React.Component {
       }
     }
     this.setState({
-      seat: array.slice(),
-      seatAvailable:array.slice()})
+      seat: array.slice()
+      })
   }
 
 
   onClickData(seat) {
+
+
     if(this.state.seatReserved.indexOf(seat) > -1 ) {
-      this.setState({
-        seatAvailable: this.state.seatAvailable.concat(seat),
-        seatReserved: this.state.seatReserved.filter(res => res != seat)
-      })
-    } else {
-      this.setState({
-        seatReserved: this.state.seatReserved.concat(seat),
-        seatAvailable: this.state.seatAvailable.filter(res => res != seat)
-      })
+      // this.setState({
+      //   seatAvailable: this.state.seatAvailable.concat(seat),
+      //   seatReserved: this.state.seatReserved.filter(res => res != seat)
+      // })
+    } else
+
+      {
+        this.setState({
+          seatReserved: this.state.seatReserved.concat(seat),
+          seatAvailable: this.state.seatAvailable.filter(res => res != seat)
+        });
+        this.saveSeats(seat);
+      }
     }
-  }
+
+
 
   render() {
     return (
@@ -76,6 +103,8 @@ class DrawGrid extends React.Component {
           </tbody>
         </table>
 
+        <AvailableList available = { this.props.available } />
+        <ReservedList reserved = { this.props.reserved } />
        </div>
     )
   }
@@ -112,4 +141,5 @@ class ReservedList extends React.Component {
   }
 }
 
-export default SiteMap
+
+export default Reservations
