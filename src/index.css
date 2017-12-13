@@ -16,7 +16,7 @@ h1 {
 
 .container {
   width: 600px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .grid td {
