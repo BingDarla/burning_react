@@ -59,10 +59,6 @@ class Home extends Component {
 
       <h1>This is the Home Page of Burning Airlines</h1>
       <HomeForm onSubmit={ this.saveLogin }/>
-
-        <h1>home page</h1>
-
-
         <ul>
           <li>Welcome: {this.state.content}</li>
           <li className="showAtLogin"><Link to="/flights">flights</Link></li>
