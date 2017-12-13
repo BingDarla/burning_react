@@ -6,9 +6,11 @@ class Home extends Component {
     return (
       <div>
         <h2>This is the home page</h2>
-        <p>
-          <Link to="/flights">flights</Link>
-        </p>
+
+        <ul>
+          <li><Link to="/flights">flights</Link></li>
+          <li><Link to="/confirmations">confirmations</Link></li>
+        </ul>
       </div>
     );
   }
