@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-image: url("water.jpg");
+  background-image: url("beach.jpg");
   width: 900px;
   margin: 0 auto;
 }
@@ -14,8 +14,8 @@ body {
 .container{
   width: 900px;
   margin: 0 auto;
-
 }
+
 
 
 #app {
@@ -35,15 +35,23 @@ h2 {
   text-transform: uppercase;
 }
 
+h4 {
+  text-align: center;
+  color: #d3d3d3;
+  padding-top: 30px;
+  text-transform: uppercase;
+}
 
 .grid td {
   width: 25px;
   height: 50px;
   padding: 50px 30px;
   border: 2px solid pink;
-  text-align: center;
+  /*text-align: center;*/
   float: left;
   margin: 5px;
+  font-size: 15px;
+  color: white;
 }
 
 .grid td:hover {
@@ -69,13 +77,24 @@ h2 {
   color: #333;
 }
 
+.td{
+  font-size: 10px;
+}
+
 li {
   list-style: none;
   color: #d3d3d3;
 }
 
 a {
-  color:black;
+  color:white;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+p{
+  padding-top:30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: grey;
 }
