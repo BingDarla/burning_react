@@ -3,14 +3,14 @@ import axios from 'axios';
 
 // const SERVER_URL = "http://593d3fe7.ngrok.io/secrets.json"
 // need to get to the route on the server get /flights
-const SERVER_URL = "http://localhost:5000/flights.json"
+const FLIGHTS_URL = "http://localhost:5000/flights.json"
 
 class SearchForm extends Component {
 
   render() {
     return (
       <div>
-      <h4>Search Form coming Soon</h4>
+      <h4>Search Form Coming Soon?</h4>
       </div>
     )
   }
@@ -20,8 +20,7 @@ class SearchForm extends Component {
 function Gallery (props) {
   return (
     <div>
-    <h4>Gallery Coming Soon</h4>
-    { props.flights.map( s => <p key={ s.id }>{ s.id } { s.flight_number } { s.origin } { s.destination } {s.airplane_id}</p> ) }
+    { props.flights.map( s => <p key={ s.id }>{ s.id } { s.flight_number } { s.origin } { s.destination } {s.airplane_id} <button></button></p> ) }
     </div>
   )
 }
@@ -47,14 +46,11 @@ class Search extends Component {
 
   constructor () {
     super()
-    // this.state = { flights: [
-    //                 {id: 1, flight: "Bobo"},
-    //                 {id: 2, flight: "Fredo"}
-    //               ]}
+
     this.state = { flights: []}
 
     const fetchFlights = () => {
-      axios.get(SERVER_URL).then( results => this.setState({ flights: results.data }) )
+      axios.get(FLIGHTS_URL).then( results => this.setState({ flights: results.data }) )
     }
   fetchFlights()
   }
@@ -64,6 +60,7 @@ class Search extends Component {
       <div>
         <h2>Search Page under construction...</h2>
         <SearchForm />
+        <h2>List of flights</h2>
         <Gallery flights={ this.state.flights }/>
       </div>
     )
