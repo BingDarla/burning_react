@@ -1,9 +1,10 @@
 import React, {SuperComponent as Component} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 
 
-class SiteMap extends React.Component {
+class Reservations extends React.Component {
 
   constructor() {
     super();
@@ -112,4 +113,4 @@ class ReservedList extends React.Component {
   }
 }
 
-export default SiteMap
+export default Reservations

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search';
-import SiteMap from './SiteMap'
+import Reservations from './Reservations'
 
 
 
@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <h1>CBJ Burning Airlines - Front End Page</h1>
         <Search />
-        <SiteMap />
+        <Reservations />
 
       </div>
     );

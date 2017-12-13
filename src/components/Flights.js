@@ -1,5 +1,6 @@
 import React, {PureComponent as Component} from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 // const SERVER_URL = "http://593d3fe7.ngrok.io/secrets.json"
 // need to get to the route on the server get /flights
@@ -20,33 +21,17 @@ class SearchForm extends Component {
 function Gallery (props) {
   return (
     <div>
-    { props.flights.map( s => <p key={ s.id }>{ s.id } { s.flight_number } { s.origin } { s.destination } {s.airplane_id} <button></button></p> ) }
+    { props.flights.map( s => <p key={ s.id }>{ s.id } { s.flight_number } { s.origin } { s.destination } {s.airplane_id} <button></button>  <Link to={`/reservations/`}>Book a seat</Link></p> ) }
     </div>
   )
 }
 
+// <Link to={`/users/${user.id}`}>Mateusz</Link>
 
-// airplane_id:
-// 28
-// date:
-// null
-// destination:
-// "Hong Kong"
-// flight_number:
-// "BCJ100"
-// id:
-// 11
-// origin:
-// "Sydney"
-// url:
-// "http://localhost:5000/flights/11.json"
-
-
-class Search extends Component {
+class Flights extends Component {
 
   constructor () {
     super()
-
     this.state = { flights: []}
 
     const fetchFlights = () => {
@@ -67,4 +52,4 @@ class Search extends Component {
   }
 }
 
-export default Search
+export default Flights
