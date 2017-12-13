@@ -14,14 +14,14 @@ class Reservations extends React.Component {
         col :6,
       seat: [],
       seatAvailable: [],
-      seatReserved: ['11','13']
+      seatReserved: []
     }
     //fetch the reserved seats
     this.saveSeats = this.saveSeats.bind(this);
     this.seatGenerate = this.seatGenerate.bind(this);
 
     const fetchSeats = () => {
-    axios.get(RESERVATION_URL).then( results => this.setState({reservation: results.data}) )
+    axios.get(RESERVATION_URL).then( results => this.setState({seatReserved: results.data.map(function(obj){return obj.seat_row_col})}) )
 
 
     // setTimeout( fetchSeats,4000); //Recursive
@@ -31,7 +31,7 @@ class Reservations extends React.Component {
 
 // save the reserved seats
   saveSeats(seat){
-    axios.post(RESERVATION_URL,{seat_row_col:seat, user_id:3}).then(results => {
+    axios.post(RESERVATION_URL,{seat_row_col:seat}).then(results => {
       this.setState({seatReserved:[results.data.seat_row_col,...this.state.seatReserved ]})
     });
     // this.setState({secrets: [...this.state.secrets,{content:s}]});  //without mutation
