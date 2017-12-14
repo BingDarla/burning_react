@@ -31,7 +31,7 @@ class Reservations extends React.Component {
 
 // save the reserved seats
   saveSeats(seat){
-    axios.post(RESERVATION_URL,{user_id:32, flight_id: 28, seat_row_col:seat}).then(results => console.log(results))
+    axios.post(RESERVATION_URL,{user_id:22, flight_id: 28, seat_row_col:seat}).then(results => console.log(results))
     // then(results => {
     //   this.setState({seatReserved:[results.data.seat_row_col,...this.state.seatReserved ]})
     // });
@@ -66,7 +66,7 @@ class Reservations extends React.Component {
           seatReserved: this.state.seatReserved.concat(seat),
           // seatAvailable: this.state.seatAvailable.filter(res => res != seat)
         });
-        
+
         this.saveSeats(seat);
       }
     }

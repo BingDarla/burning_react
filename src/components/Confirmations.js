@@ -2,15 +2,24 @@ import React, {PureComponent as Component} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
-const CONFIRMATION_URL = "http://localhost:5000/flights.json"
+const CONFIRMATION_URL = "http://localhost:5000/reservations.json"
 
 function Gallery (props) {
   return (
     <div>
-    { props.flights.map( s => <p key={ s.id }>{ s.id } { s.flight_number } { s.origin } { s.destination } {s.airplane_id} <button></button>  <Link to={`/reservations/`}>Book a seat</Link></p> ) }
+    { props.flights.map( s => <p key={ s.id }>
+      Name: { s.user.name }
+      Flight Number: { s.flight.flight_number }
+      Origin: { s.flight.origin }
+      Destination: { s.flight.destination }
+      Seat Number: { s.seat_row_col }
+      </p> ) }
     </div>
   )
 }
+
+
+
 
 
 class Confirmations extends Component {
@@ -28,7 +37,9 @@ class Confirmations extends Component {
     return (
       <div>
         <h2>Confirmation Page</h2>
+
         <Gallery flights={ this.state.flights }/>
+
       </div>
     )
   }
