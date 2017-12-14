@@ -6,12 +6,12 @@ const CONFIRMATION_URL = "http://localhost:5000/reservations.json"
 
 function Gallery (props) {
   return (
-    <div>
+    <div className="confirmation">
     { props.flights.map( s => <p key={ s.id }>
-      Name: { s.user.name }
-      Flight Number: { s.flight.flight_number }
-      Origin: { s.flight.origin }
-      Destination: { s.flight.destination }
+      Name: { s.user.name}{'  '}
+      Flight Number: { s.flight.flight_number }{'  '}
+      Origin: { s.flight.origin }{'  '}
+      Destination: { s.flight.destination }{'  '}
       Seat Number: { s.seat_row_col }
       </p> ) }
     </div>
@@ -36,7 +36,7 @@ class Confirmations extends Component {
   render () {
     return (
       <div>
-        <h2>Confirmation Page</h2>
+        <h1>Confirmation Page</h1>
 
         <Gallery flights={ this.state.flights }/>
 
