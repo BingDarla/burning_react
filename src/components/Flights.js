@@ -7,11 +7,33 @@ import { Link } from 'react-router-dom'
 const FLIGHTS_URL = "http://localhost:5000/flights.json"
 
 class SearchForm extends Component {
+  constructor() {
+    super();
+    this.state = { content: '' }
+    this._handleChange = this._handleChange.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  _handleChange(e) {
+    this.setState ( { content: e.target.value } )
+  }
+
+_handleSubmit (e) {
+  e.preventDefault();
+
+  this.props.onSubmit ( this.state.content )
+  // this.props.onSubmit this (SecretsForm) has many props, thagt come from parent (Secrets). One of them is called onSubmit
+  // ( this.state.content ) is the argument that is passed back up. It comes from SecretsForm
+  this.setState( { content: ''});
+}
 
   render() {
     return (
       <div>
-      <h4>Search Form Coming Soon?</h4>
+        <form onSubmit={ this._handleSubmit }>
+        <input onChange={ this._handleChange } value={ this.state.content }></input>
+        <input type="submit" value="Search Destinations" />
+        </form>
       </div>
     )
   }
@@ -40,11 +62,18 @@ class Flights extends Component {
   fetchFlights()
   }
 
+
+  searchFlights(s) {
+  console.log(s);
+  }
+
+
+
   render() {
     return (
       <div>
         <h2>Search For a Flight...</h2>
-        <SearchForm />
+        <SearchForm onSubmit={ this.searchFlights } />
         <h2>Available flights</h2>
         <Gallery flights={ this.state.flights }/>
       </div>

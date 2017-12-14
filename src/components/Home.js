@@ -76,7 +76,8 @@ class Home extends Component {
       }
     }
     if (!userFind){
-      console.log('User is not exist.');
+      console.log(s, 'User is not exist.');
+      return(<p>User is not exist</p>)
     }
   }
   saveLogin(s) {
