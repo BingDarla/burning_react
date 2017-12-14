@@ -43,7 +43,7 @@ class Flights extends Component {
   render() {
     return (
       <div>
-        <h2>Search Page under construction...</h2>
+        <h2>Search For a Flight...</h2>
         <SearchForm />
         <h2>Available flights</h2>
         <Gallery flights={ this.state.flights }/>
