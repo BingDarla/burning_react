@@ -3,9 +3,6 @@ import axios from 'axios';
 
 const RESERVATION_URL = "http://localhost:5000/reservations.json"
 
-
-
-
 class Reservations extends React.Component {
 
   constructor() {
@@ -108,7 +105,6 @@ class DrawGrid extends React.Component {
         </table>
 
 
-        <ReservedList reserved = { this.props.reserved } />
        </div>
     )
   }
