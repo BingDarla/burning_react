@@ -11,10 +11,12 @@ class Reservations extends React.Component {
   constructor() {
     super();
       this.state = {
+        userId:32,
+        flightId:28,
         row :10,
         col :6,
-      seat: [],
-      seatReserved: []
+        seat: [],
+        seatReserved: []
     }
     //fetch the reserved seats
     this.saveSeats = this.saveSeats.bind(this);
@@ -31,7 +33,7 @@ class Reservations extends React.Component {
 
 // save the reserved seats
   saveSeats(seat){
-    axios.post(RESERVATION_URL,{user_id:22, flight_id: 28, seat_row_col:seat}).then(results => console.log(results))
+    axios.post(RESERVATION_URL,{user_id:this.state.userId, flight_id:this.state.flightId, seat_row_col:seat}).then(results => console.log(results))
     // then(results => {
     //   this.setState({seatReserved:[results.data.seat_row_col,...this.state.seatReserved ]})
     // });

@@ -1,14 +1,24 @@
 import React, { PureComponent as Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const URSER_URL = 'http://localhost:5000/users.json'
 
 
 class HomeForm extends Component {
   constructor() {
     super();
-    this.state = { content: '' }
+    this.state = {
+      content: ''
+    }
+
+
+//
     this._handleChange = this._handleChange.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
   }
+
+
 
   _handleChange(e) {
     this.setState ( { content: e.target.value } )
@@ -36,21 +46,47 @@ _handleSubmit (e) {
 class Home extends Component {
 
   constructor () {
-    super()
-    this.state = { content: "" }
-    this.saveLogin = this.saveLogin.bind(this);
-  }
+    super();
+    this.state = {
+      user: "" ,
+      userList :[]
+    };
 
+    this.saveLogin = this.saveLogin.bind(this);
+    this.userValid = this.userValid.bind(this);
+    const fetchUser = () => {
+    axios.get(URSER_URL).then( results => this.setState({userList: results.data.map(function(obj){  return obj.name}) } )
+    )};
+
+    fetchUser();
+}
+
+
+
+
+
+  userValid (s){
+    let userFind = false;
+    for (let i = 0;i<this.state.userList;i++){
+
+      if (s.toLowerCase() === this.state.userList[i].toLowerCase()){
+        console.log('User is valid');
+        userFind = true;
+        break;
+      }
+    }
+    if (!userFind){
+      console.log('User is not exist.');
+    }
+  }
   saveLogin(s) {
     console.log(s, "in the home form");
-    // s comes from _handleSubmit in SecretsForm.
-    // it is the this.state.content passed in by this.props.onSubmit
-    // this.setState( { secrets: [...this.state.secrets, s]}); //ref immutability, makes a new array and sets state sexcrets to this new array
-    // axios.post(SERVER_URL, {content: s}).then(results => {
-    //   this.setState( { secrets: [results.data, ...this.state.secrets]})
-    // })
-    this.setState({ content : s })
+
+    this.setState({ user : s });
+    console.log(this.state.userList);
+    this.userValid(s);
   }
+
 
 
   render() {
@@ -60,7 +96,7 @@ class Home extends Component {
       <h1>This is the Home Page of Burning Airlines</h1>
       <HomeForm onSubmit={ this.saveLogin }/>
         <ul>
-          <li>Welcome: {this.state.content}</li>
+          <li>Welcome: {this.state.user}</li>
           <li className="showAtLogin"><Link to="/flights">flights</Link></li>
           <li className="showAtLogin"><Link to="/confirmations">confirmations</Link></li>
         </ul>
