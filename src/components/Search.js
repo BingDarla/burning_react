@@ -10,7 +10,10 @@ class SearchForm extends Component {
   render() {
     return (
       <div>
-      <h4>Search Form Coming Soon?</h4>
+        <form>
+        <input></input>
+        <button></button>
+        </form>
       </div>
     )
   }

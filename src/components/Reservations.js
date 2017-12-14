@@ -8,8 +8,8 @@ class Reservations extends React.Component {
   constructor() {
     super();
       this.state = {
-        userId:32,
-        flightId:28,
+        userId:25,
+        flightId:22,
         row :10,
         col :6,
         seat: [],
