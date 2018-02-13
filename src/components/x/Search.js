@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // const SERVER_URL = "http://593d3fe7.ngrok.io/secrets.json"
 // need to get to the route on the server get /flights
-const FLIGHTS_URL = "http://localhost:5000/flights.json"
+const FLIGHTS_URL = "https://burning-airline.herokuapp.com/flights.json"
 
 class SearchForm extends Component {
 

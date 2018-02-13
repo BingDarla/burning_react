@@ -2,7 +2,7 @@ import React, {PureComponent as Component} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
-const CONFIRMATION_URL = "http://localhost:5000/reservations.json"
+const CONFIRMATION_URL = "https://burning-airline.herokuapp.com/reservations.json"
 
 function Gallery (props) {
   return (

@@ -1,106 +1,38 @@
-import React, { PureComponent as Component } from 'react';
+import React, {PureComponent as Component} from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import Flight from './Flight.js';
 
-const URSER_URL = 'http://localhost:5000/users.json'
+const URSER_URL = 'https://burning-airline.herokuapp.com/users.json';
 
-
-class HomeForm extends Component {
+class Home extends Component {
   constructor() {
     super();
     this.state = {
-      content: ''
+      userName: ''
     }
-
-
-//
     this._handleChange = this._handleChange.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-
-
   _handleChange(e) {
-    this.setState ( { content: e.target.value } )
+    this.setState({userName: e.target.value.toUpperCase()});
   }
 
-_handleSubmit (e) {
-  e.preventDefault();
-  this.props.onSubmit ( this.state.content )
-  // this.props.onSubmit this (SecretsForm) has many props, thagt come from parent (Secrets). One of them is called onSubmit
-  // ( this.state.content ) is the argument that is passed back up. It comes from SecretsForm
-  // this.setState( { content: ''});
-}
-
-  render () {
-    return (
-      <form onSubmit={ this._handleSubmit }>
-        <input onChange={ this._handleChange } value={ this.state.content }></input>
-        <input type="submit" value="Login..." />
-      </form>
-    )
+  _handleSubmit(e) {
+    e.preventDefault();
   }
-}
-
-
-class Home extends Component {
-
-  constructor () {
-    super();
-    this.state = {
-      user: "" ,
-      userList :[]
-    };
-
-    this.saveLogin = this.saveLogin.bind(this);
-    this.userValid = this.userValid.bind(this);
-    const fetchUser = () => {
-    axios.get(URSER_URL).then( results => this.setState({userList: results.data.map(function(obj){  return obj.name}) } )
-    )};
-
-    fetchUser();
-}
-
-
-
-
-
-  userValid (s){
-    let userFind = false;
-    for (let i = 0;i<this.state.userList;i++){
-
-      if (s.toLowerCase() === this.state.userList[i].toLowerCase()){
-        console.log('User is valid');
-        userFind = true;
-        break;
-      }
-    }
-    if (!userFind){
-      console.log('User is not exist.');
-    }
-  }
-  saveLogin(s) {
-    console.log(s, "in the home form");
-
-    this.setState({ user : s });
-    console.log(this.state.userList);
-    this.userValid(s);
-  }
-
-
 
   render() {
     return (
-      <div>
-
-      <h1>This is the Home Page of Burning Airlines</h1>
-      <HomeForm onSubmit={ this.saveLogin }/>
-        <ul>
-          <li>Welcome: {this.state.user}</li>
-          <li className="showAtLogin"><Link to="/flights">flights</Link></li>
-          <li className="showAtLogin"><Link to="/confirmations">confirmations</Link></li>
-        </ul>
+      <div className="App">
+        <h1>Burning Airlines<span id='hello'></span></h1>
+        <div className='login' id='log'>
+          <p>Username</p>
+          <input onChange={this._handleChange}/>
+          <button onClick={this._handleSubmit}><Link to={{pathname: '/flights/' + this.state.userName}}>Login</Link></button>
+        </div>
       </div>
+
     );
   }
 }
